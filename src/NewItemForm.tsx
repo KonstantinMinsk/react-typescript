@@ -7,22 +7,14 @@ interface NewItemFormProps {
 }
 
 export const NewItemForm = ({ onAdd }: NewItemFormProps) => {
-    const initialText = "";
-    const [text, setText] = useState(initialText);
+    const [text, setText] = useState("");
     const inputRef = useFocus();
 
     const handleAddText = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter" && text !==initialText) {
+        if (event.key === "Enter") {
             onAdd(text) 
         }
     }
-
-    // TODO: Why reboot App ?
-    // const onAdding = (text: string) => {
-    //     if (text !== initialText) {
-    //         onAdd(text) 
-    //     }
-    // }
 
     return (
         <NewItemFormContainer>

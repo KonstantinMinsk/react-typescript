@@ -1,17 +1,19 @@
 import React from 'react';
 import { ColumnContainer, ColumnTitle } from "./styles"
 import { AddNewItem } from "./AddNewItem"
-import { useAppState } from "./state/AppStateContext"
 import { Card } from "./Card"
-import { addTask } from "./state/actions"
+import { useAppStore } from './store/useAppStore';
+import { observer } from "mobx-react";
 
 interface ColumnProps {
     text: string;
     id: string;
 }
 
-export const Column = ({ text, id }: ColumnProps) => {
-    const { getTasksByListId, dispatch } = useAppState()
+export const Column = observer(({ text, id }: ColumnProps) => {
+    const {
+        appStore: { getTasksByListId, addTask },
+    } = useAppStore();
     const tasks = getTasksByListId(id)
     
     return (
@@ -22,9 +24,9 @@ export const Column = ({ text, id }: ColumnProps) => {
             ))}
             <AddNewItem
                 toggleButtonText="+ Add another task"
-                onAdd={(text) => dispatch(addTask(text, id))}
+                onAdd={(text) => addTask(text, id)}
                 dark
             />
         </ColumnContainer>
     )
-}
+})
