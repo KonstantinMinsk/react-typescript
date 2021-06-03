@@ -4,20 +4,22 @@ import { AddNewItem } from "./AddNewItem"
 import { Column } from "./Column"
 import { AppStoreContext, useAppStore } from './store/useAppStore';
 import { observer } from "mobx-react";
+import { appStore as store } from "./store/useAppStore"
 
 const App = () => {
   const { appStore } = useAppStore();
-  // const { appStore } = useContext(AppStoreContext);
   const { addList, store: { lists } } = appStore;
   const table = lists.map(list => <Column text={list.text} key={list.id} id={list.id} />);  
 
   return (
-    // <AppStoreContext.Provider value={{ appStore }}>
       <AppContainer>
         {table}
         <AddNewItem toggleButtonText="+ Add another list" onAdd={(text) => addList(text)}/>
       </AppContainer>
-    // </AppStoreContext.Provider>
+
+  // if use useContext 
+  // <AppStoreContext.Provider value={{ store }}>
+  // </AppStoreContext.Provider>
   );
 }
 

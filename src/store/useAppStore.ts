@@ -1,7 +1,7 @@
 import { AppStore } from "./store";
 import { createContext, useContext } from "react";
 
-// export const appStore = new AppStore();
+export const appStore = new AppStore();
 
 interface AppStoreContextValue {
     appStore: AppStore;

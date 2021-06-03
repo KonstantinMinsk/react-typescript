@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ColumnContainer, ColumnTitle } from "./styles"
 import { AddNewItem } from "./AddNewItem"
 import { Card } from "./Card"
-import { useAppStore } from './store/useAppStore';
+import { AppStoreContext, useAppStore } from './store/useAppStore';
 import { observer } from "mobx-react";
 
 interface ColumnProps {
@@ -11,6 +11,11 @@ interface ColumnProps {
 }
 
 export const Column = observer(({ text, id }: ColumnProps) => {
+    // if use useContext
+    // const {
+    //     appStore: { getTasksByListId, addTask },
+    // } = useContext(AppStoreContext);
+
     const {
         appStore: { getTasksByListId, addTask },
     } = useAppStore();
